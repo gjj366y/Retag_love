@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -33,15 +32,16 @@
         .button:hover {
             background-color: #c2185b;
         }
-        .name-input {
-            margin-top: 40px;
-        }
-        input[type="text"] {
+        textarea {
+            margin-top: 30px;
             padding: 10px;
             font-size: 18px;
             border: 2px solid #d63384;
             border-radius: 8px;
-            width: 200px;
+            width: 80%;
+            max-width: 400px;
+            height: 100px;
+            resize: none;
         }
         .fixed-name {
             margin-top: 50px;
@@ -59,13 +59,14 @@
     </div>
 
     <div id="mainContent">
-        <h1 id="nameDisplay">ريتاج</h1>
+        <h1>ريتاج</h1>
         <h2>احبك واعشقك يا افضل من دخل قلبي وحياتي</h2>
 
-        <div class="name-input">
-            <p>غيّر الاسم:</p>
-            <input type="text" id="nameInput" placeholder="اكتبي اسمك هنا">
-            <button class="button" onclick="changeName()">مشاركة</button>
+        <div>
+            <p>أرسل كلام إلى صبحي:</p>
+            <textarea id="messageInput" placeholder="اكتب رسالتك هنا..."></textarea>
+            <br>
+            <button class="button" onclick="shareMessage()">مشاركة الكلام</button>
         </div>
 
         <div class="fixed-name">اسم الموقع محفوظ لـ: صبحي عبد الكريم</div>
@@ -77,10 +78,19 @@
             document.getElementById("mainContent").style.display = "block";
         }
 
-        function changeName() {
-            var newName = document.getElementById("nameInput").value.trim();
-            if(newName !== "") {
-                document.getElementById("nameDisplay").innerText = newName;
+        function shareMessage() {
+            const message = document.getElementById("messageInput").value.trim();
+            if (message) {
+                if (navigator.share) {
+                    navigator.share({
+                        title: "رسالة إلى صبحي",
+                        text: message
+                    }).catch(console.error);
+                } else {
+                    alert("جهازك لا يدعم المشاركة التلقائية. انسخ الرسالة يدويًا.");
+                }
+            } else {
+                alert("اكتب رسالة قبل المشاركة.");
             }
         }
     </script>
