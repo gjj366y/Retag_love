@@ -8,21 +8,21 @@
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
-      overflow: hidden;
       background: linear-gradient(45deg, #ff7eb9, #feb47b);
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
+      overflow: hidden;
     }
 
     .container {
       text-align: center;
-      z-index: 2;
       animation: fadeInUp 1s ease-out forwards;
       opacity: 0;
       text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      width: 100%;
     }
 
     h1 {
@@ -33,19 +33,10 @@
     }
 
     p {
-      font-size: 28px;
-      animation-delay: 1.2s;
+      font-size: 24px;
+      animation-delay: 1s;
       line-height: 1.5;
       color: #ffebcd;
-    }
-
-    .signature {
-      margin-top: 40px;
-      font-size: 20px;
-      color: #fff;
-      opacity: 0.7;
-      animation-delay: 2s;
-      font-style: italic;
     }
 
     .button {
@@ -69,11 +60,9 @@
       display: none;
     }
 
-    .message {
-      font-size: 24px;
+    .question {
+      font-size: 28px;
       margin-top: 20px;
-      animation: fadeInUp 1s ease-out forwards;
-      opacity: 0;
     }
 
     @keyframes fadeInUp {
@@ -90,69 +79,78 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1>أهلاً ياعمري ياريتاج</h1>
+  <div class="container" id="page1">
+    <h1>أهلاً ياعمري يا ريتاج</h1>
     <p>أنتِ نبضي، وهدوء روحي، وكل لحظة حلوة في حياتي.</p>
-    <button class="button" id="firstButton">اضغطي هنا ياروحي</button>
+    <p>يا من زينتِ عالمي بوجودك، وكل لحظة معك هي أجمل من الأخرى.</p>
+    <p>أنتِ الحلم الجميل الذي تحقق في حياتي.</p>
+    <p>أنتِ الأمل الذي أعيش من أجله، أحبك بكل تفاصيلك يا ريتاج.</p>
+    <button class="button" onclick="goToPage2()">اضغطي هنا يا روحي</button>
+  </div>
 
-    <!-- Hidden messages -->
-    <div class="message hidden" id="messageOne">
-      <p>أنتِ جميلة في كل لحظة، وجودك يجعل العالم أفضل.</p>
-      <button class="button" id="secondButton">اضغطي هنا ياروحي</button>
-    </div>
+  <div class="container hidden" id="page2">
+    <h1>أسئلة صبحي</h1>
+    <p class="question">كم عمر صبحي؟</p>
+    <button class="button" onclick="showQuestion2()">١٦</button>
+    <button class="button" onclick="showQuestion2()">١٧</button>
+    <button class="button" onclick="showQuestion2()">١٨</button>
+  </div>
 
-    <div class="message hidden" id="messageTwo">
-      <p>شاركي الرابط باسم غير ريتاج:</p>
-      <input type="text" id="customName" placeholder="اكتب اسمك هنا" />
-      <p id="nameMessage" style="color: #ffccff; font-size: 18px; display: none;">يرجى إدخال اسمك أولاً.</p>
-      <button class="button" id="thirdButton">شارك الرابط</button>
-    </div>
+  <div class="container hidden" id="question2">
+    <p class="question">أفضل أكلة لدى صبحي؟</p>
+    <button class="button" onclick="showQuestion3()">ملوخية</button>
+    <button class="button" onclick="showQuestion3()">كبسة دجاج</button>
+    <button class="button" onclick="showQuestion3()">جميع ما سبق</button>
+  </div>
 
-    <div class="message hidden" id="messageThree">
-      <p>شاركي كلام حلو لحبيبك صبحي</p>
-      <button class="button" id="finalButton">أرسل</button>
-      <div id="confirmationMessage" style="display: none; font-size: 20px; color: #ffccff;">تم إرسال الرابط بنجاح!</div>
-    </div>
+  <div class="container hidden" id="question3">
+    <p class="question">هل صبحي يفضل السكر على ريتاج؟</p>
+    <button class="button" onclick="showQuestion4()">نعم</button>
+    <button class="button" onclick="showQuestion4()">لا</button>
+  </div>
+
+  <div class="container hidden" id="question4">
+    <p class="question">هل صبحي يعشق ريتاج؟</p>
+    <button class="button" onclick="showQuestion5()">نعم</button>
+    <button class="button" onclick="showQuestion5()">لا</button>
+  </div>
+
+  <div class="container hidden" id="question5">
+    <p class="question">أين يكون صبحي الساعة ١٢:٠٠؟</p>
+    <button class="button" onclick="finish()">بالبيت نايم</button>
+    <button class="button" onclick="finish()">طالع مع أصدقائه</button>
   </div>
 
   <script>
-    // Buttons and message logic
-    const firstButton = document.getElementById("firstButton");
-    const secondButton = document.getElementById("secondButton");
-    const thirdButton = document.getElementById("thirdButton");
-    const finalButton = document.getElementById("finalButton");
+    // الانتقال بين الصفحات
+    function goToPage2() {
+      document.getElementById('page1').classList.add('hidden');
+      document.getElementById('page2').classList.remove('hidden');
+    }
 
-    const messageOne = document.getElementById("messageOne");
-    const messageTwo = document.getElementById("messageTwo");
-    const messageThree = document.getElementById("messageThree");
+    function showQuestion2() {
+      document.getElementById('page2').classList.add('hidden');
+      document.getElementById('question2').classList.remove('hidden');
+    }
 
-    const customNameInput = document.getElementById("customName");
-    const nameMessage = document.getElementById("nameMessage");
-    const confirmationMessage = document.getElementById("confirmationMessage");
+    function showQuestion3() {
+      document.getElementById('question2').classList.add('hidden');
+      document.getElementById('question3').classList.remove('hidden');
+    }
 
-    firstButton.addEventListener("click", () => {
-      messageOne.classList.remove("hidden");
-    });
+    function showQuestion4() {
+      document.getElementById('question3').classList.add('hidden');
+      document.getElementById('question4').classList.remove('hidden');
+    }
 
-    secondButton.addEventListener("click", () => {
-      messageTwo.classList.remove("hidden");
-    });
+    function showQuestion5() {
+      document.getElementById('question4').classList.add('hidden');
+      document.getElementById('question5').classList.remove('hidden');
+    }
 
-    thirdButton.addEventListener("click", () => {
-      if (customNameInput.value.trim() === "") {
-        nameMessage.style.display = "block";
-      } else {
-        messageThree.classList.remove("hidden");
-        nameMessage.style.display = "none";
-      }
-    });
-
-    finalButton.addEventListener("click", () => {
-      const customName = customNameInput.value;
-      if (customName) {
-        confirmationMessage.style.display = "block";
-      }
-    });
+    function finish() {
+      alert("تم الإجابة على الأسئلة بنجاح!");
+    }
   </script>
 
 </body>
