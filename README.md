@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -239,4 +240,24 @@
         ٢. أفضل أكلة لدى صبحي؟: جميع ما سبق  
         ٣. هل صبحي يفضل السكر على ريتاج؟: لا يفضل ريتاج عن السكر  
         ٤. هل صبحي يعشق ريتاج؟: نعم  
-        ٥. أين يكون صبحي الساعة ١
+        ٥. أين يكون صبحي الساعة ١٢:٠٠؟: بالبيت نايم`;
+
+      const instagramUrl = `https://www.instagram.com/messages/compose/?text=${encodeURIComponent(message)}`;
+      window.open(instagramUrl, "_blank");
+    }
+
+    // مشاركة النتائج عبر التطبيقات
+    function shareResults() {
+      const message = `إجابات الأسئلة:\n
+        ١. كم عمر صبحي؟: ١٦\n
+        ٢. أفضل أكلة لدى صبحي؟: جميع ما سبق\n
+        ٣. هل صبحي يفضل السكر على ريتاج؟: لا يفضل ريتاج عن السكر\n
+        ٤. هل صبحي يعشق ريتاج؟: نعم\n
+        ٥. أين يكون صبحي الساعة ١٢:٠٠؟: بالبيت نايم`;
+
+      if (navigator.share) {
+        navigator.share({
+          title: 'إجابات الأسئلة',
+          text: message,
+          url: window.location.href
+        }).catch((error) => console.log
