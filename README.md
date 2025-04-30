@@ -104,12 +104,14 @@
     <div class="message hidden" id="messageTwo">
       <p>شاركي الرابط باسم غير ريتاج:</p>
       <input type="text" id="customName" placeholder="اكتب اسمك هنا" />
+      <p id="nameMessage" style="color: #ffccff; font-size: 18px; display: none;">يرجى إدخال اسمك أولاً.</p>
       <button class="button" id="thirdButton">شارك الرابط</button>
     </div>
 
     <div class="message hidden" id="messageThree">
       <p>شاركي كلام حلو لحبيبك صبحي</p>
       <button class="button" id="finalButton">أرسل</button>
+      <div id="confirmationMessage" style="display: none; font-size: 20px; color: #ffccff;">تم إرسال الرابط بنجاح!</div>
     </div>
   </div>
 
@@ -124,6 +126,10 @@
     const messageTwo = document.getElementById("messageTwo");
     const messageThree = document.getElementById("messageThree");
 
+    const customNameInput = document.getElementById("customName");
+    const nameMessage = document.getElementById("nameMessage");
+    const confirmationMessage = document.getElementById("confirmationMessage");
+
     firstButton.addEventListener("click", () => {
       messageOne.classList.remove("hidden");
     });
@@ -133,16 +139,21 @@
     });
 
     thirdButton.addEventListener("click", () => {
-      messageThree.classList.remove("hidden");
+      if (customNameInput.value.trim() === "") {
+        nameMessage.style.display = "block";
+      } else {
+        messageThree.classList.remove("hidden");
+        nameMessage.style.display = "none";
+      }
     });
 
     finalButton.addEventListener("click", () => {
-      const customName = document.getElementById("customName").value;
+      const customName = customNameInput.value;
       if (customName) {
-        alert(`تم إرسال الرابط! تحياتي لـ ${customName}`);
+        confirmationMessage.style.display = "block";
       }
     });
   </script>
 
 </body>
-</html> 
+</html>
