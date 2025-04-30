@@ -15,6 +15,7 @@
       align-items: center;
       color: #fff;
       overflow: hidden;
+      width: 100%;
     }
 
     .container {
@@ -23,33 +24,40 @@
       opacity: 0;
       text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
       width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      max-width: 400px;
+      margin: 0 auto;
     }
 
     h1 {
-      font-size: 56px;
+      font-size: 28px;
       margin-bottom: 20px;
       animation-delay: 0.5s;
       color: #ffccff;
     }
 
     p {
-      font-size: 24px;
+      font-size: 18px;
       animation-delay: 1s;
       line-height: 1.5;
       color: #ffebcd;
+      margin-bottom: 20px;
     }
 
     .button {
       background-color: #ff0066;
       color: white;
       padding: 15px 30px;
-      font-size: 22px;
+      font-size: 18px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       margin: 20px 0;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease;
+      width: 100%;
+      max-width: 300px;
     }
 
     .button:hover {
@@ -61,7 +69,7 @@
     }
 
     .question {
-      font-size: 28px;
+      font-size: 20px;
       margin-top: 20px;
     }
 
@@ -73,6 +81,21 @@
       100% {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .button {
+        font-size: 16px;
+        padding: 12px 25px;
       }
     }
   </style>
@@ -121,6 +144,13 @@
     <button class="button" onclick="finish()">طالع مع أصدقائه</button>
   </div>
 
+  <!-- صفحة ارسال الإجابات -->
+  <div class="container hidden" id="finishPage">
+    <h1>تم الإجابة على الأسئلة!</h1>
+    <p>إرسال الإجابات إلى صبحي:</p>
+    <button class="button" onclick="sendToWhatsApp()">إرسال إلى صبحي عبر واتساب</button>
+  </div>
+
   <script>
     // الانتقال بين الصفحات
     function goToPage2() {
@@ -149,7 +179,29 @@
     }
 
     function finish() {
-      alert("تم الإجابة على الأسئلة بنجاح!");
+      document.getElementById('question5').classList.add('hidden');
+      document.getElementById('finishPage').classList.remove('hidden');
+    }
+
+    // إرسال الإجابات إلى صبحي عبر واتساب
+    function sendToWhatsApp() {
+      const answers = {
+        age: "١٦",  // على سبيل المثال
+        favoriteDish: "جميع ما سبق",  // على سبيل المثال
+        prefersSugar: "لا يفضل ريتاج عن السكر",
+        lovesRetaj: "نعم",
+        location: "بالبيت نايم"
+      };
+
+      const message = `إجابات الأسئلة:\n
+        ١. كم عمر صبحي؟: ${answers.age}\n
+        ٢. أفضل أكلة لدى صبحي؟: ${answers.favoriteDish}\n
+        ٣. هل صبحي يفضل السكر على ريتاج؟: ${answers.prefersSugar}\n
+        ٤. هل صبحي يعشق ريتاج؟: ${answers.lovesRetaj}\n
+        ٥. أين يكون صبحي الساعة ١٢:٠٠؟: ${answers.location}`;
+
+      const whatsappUrl = `https://wa.me/966557073705?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
     }
   </script>
 
